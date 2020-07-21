@@ -1,0 +1,18 @@
+version: "3"
+services:
+  media_archiver:
+    build: .
+    container_name: media_archiver
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MANAGED_WATCH_DIRS=/opt/TO_SORT
+      - PASSIVE_WATCH_DIRS=/opt/syncthing/Camera,/opt/syncthing/WhatsApp_Images
+      - OUT_DIR=/opt/archive
+    volumes:
+      - '/opt/TO_SORT:/opt/TO_SORT'
+      - '/opt/photos:/opt/archive'
+      - '/opt/syncthing/Camera:/opt/syncthing/Camera'
+      - '/opt/syncthing/WhatsApp/Media/WhatsApp Images:/opt/syncthing/WhatsApp_Images'
+    restart: unless-stopped
+
